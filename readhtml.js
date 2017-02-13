@@ -7,15 +7,21 @@ function getAndPrintHTMLChunks () {
     path: '/http-examples/step1.html'
   };
 
-  /* Add your code here */
-getHTML.get(requestOptions, function(response){
+  //var buffer = "";
 
-  response.setEncoding('utf8');
-  response.on('data', function (data){
-    console.log('Chunk received. Length:', data.length);
+  /* Add your code here */
+  getHTML.get(requestOptions, function(response){
+
+    response.setEncoding('utf8');
+    response.on('data', function (data){
+      //buffer += data;
+      console.log('Chunk received. Length:', data.length);
+      console.log(data + '\n');
+    });
+    response.on('end', function(){
+      console.log('Response stream complete.');
+      //console.log(buffer);
+    });
   });
-response.on('end', function(){
-  console.log('Response stream complete.');
-});
-});
 }
+getAndPrintHTMLChunks();
